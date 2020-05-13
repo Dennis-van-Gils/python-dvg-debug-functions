@@ -3,3 +3,5 @@ pip install -e .
 pytest
 python setup.py sdist
 check-manifest --create
+python setup.py bdist_wheel sdist
+twine upload dist/*
