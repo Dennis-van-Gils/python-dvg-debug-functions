@@ -7,10 +7,9 @@ include .coveragerc
 include .cookiecutterrc
 include .editorconfig
 
-include AUTHORS.md
-include CHANGELOG.md
 include LICENSE.txt
-include README.md
+include *.md
+recursive-include images *.png
 
 include tox.ini .travis.yml .appveyor.yml .readthedocs.yml .pre-commit-config.yaml
 
