@@ -28,8 +28,8 @@ install:
   - pip install -e .
 
 script:
-  - coverage run --source=src -m pytest
-  #- pytest --cov src --cov-append
+  #- coverage run --source=src -m pytest
+  - pytest --cov src --cov-append
     
 after_success:
   - coverage combine .coverage
