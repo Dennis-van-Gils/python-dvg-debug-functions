@@ -25,6 +25,7 @@ jobs:
       python: 3.8
 
 install:
+  - pip install pytest-cov
   - pip install -e .
   - pip install coveralls
 
@@ -33,6 +34,6 @@ script:
   - pytest --cov src
     
 after_sucess:
-  - coverage combine
+  - coverage combine .coverage
   - coverage report -m
   - coveralls
