@@ -6,6 +6,14 @@ import io
 
 def test_dprint():
     with mock.patch('sys.stdout', new=io.StringIO()) as fake_stdout:
+        dprint("No color")
+
+    assert fake_stdout.getvalue() == 'No color\n'
+
+
+
+def test_dprint_in_red():
+    with mock.patch('sys.stdout', new=io.StringIO()) as fake_stdout:
         dprint("In red", ANSI.RED)
 
     assert fake_stdout.getvalue() == '\x1b[1;31mIn red\x1b[1;37m\n'
@@ -21,3 +29,12 @@ def test_pft():
             
         assert fake_stdout.getvalue().split('\n')[-2] == \
             '\x1b[1;31mZeroDivisionError: \x1b[1;37mdivision by zero'
+
+
+
+def test_pft_err_as_string():
+    with mock.patch('sys.stdout', new=io.StringIO()) as fake_stdout:
+        pft("Custom error string", 1)
+        
+    assert fake_stdout.getvalue().split('\n')[-2] == \
+        '\x1b[1;31mError: \x1b[1;37mCustom error string'
