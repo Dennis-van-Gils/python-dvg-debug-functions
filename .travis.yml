@@ -13,7 +13,6 @@ jobs:
 
     - name: "py3.7 with PyQt5"
       python: 3.7
-      sudo: required
       before_install:
         wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh;
         bash ./miniconda.sh -b -p ${HOME}/miniconda;
@@ -29,10 +28,10 @@ install:
   - pip install -e .
 
 script:
-  #- coverage run --source=src -m pytest
-  - pytest --cov src --cov-append
+  - coverage run --source=src -m pytest
+  #- pytest --cov src --cov-append
     
-after_sucess:
+after_success:
   - coverage combine .coverage
   - coverage report -m
   - coveralls
