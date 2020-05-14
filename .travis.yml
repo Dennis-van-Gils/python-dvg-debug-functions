@@ -30,8 +30,8 @@ install:
 
 script:
   - coverage run --source=src -m pytest
-  - coverage combine
     
 after_sucess:
+  - coverage combine
   - coverage report -m
   - coveralls
