@@ -29,7 +29,7 @@ install:
 
 script:
   #- coverage run -p --source=src -m pytest
-  - pytest --cov src --cov-append
+  - PYTHONPATH=src pytest --cov src --cov-append
     
 after_success:
   - coverage combine
