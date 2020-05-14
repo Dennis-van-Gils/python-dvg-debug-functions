@@ -37,7 +37,7 @@ def test_pft_overshoot_callstack():
         0/0
     except ZeroDivisionError as err:
         with mock.patch('sys.stdout', new=io.StringIO()) as fake_stdout:
-            pft(err, 30)
+            pft(err, 50)
             
         assert fake_stdout.getvalue().split('\n')[-2] == \
             '\x1b[1;31mZeroDivisionError: \x1b[1;37mdivision by zero'
