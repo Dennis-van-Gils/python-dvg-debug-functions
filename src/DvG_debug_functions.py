@@ -15,7 +15,7 @@ Functions:
 """
 __author__      = "Dennis van Gils"
 __authoremail__ = "vangils.dennis@gmail.com"
-__url__         = "https://github.com/Dennis-van-Gils/DvG_debug_functions"
+__url__         = "https://github.com/Dennis-van-Gils/python-dvg-debug-functions"
 __date__        = "23-08-2018"
 __version__     = "1.0.0"
 
@@ -49,8 +49,10 @@ def dprint(str_msg, ANSI_color=None):
 
     There is a lot of overhead using this print statement, but it is
     particularly well-suited for multithreaded PyQt programs where multiple
-    threads are printing information to the same terminal. On the contrary, a
-    regular print statement will likely result in mixed up text output.
+    threads are each printing information to the same terminal. The dprint
+    function ensure that each line sent to the terminal will remain as a
+    continious single line, whereas a regular print statement will likely
+    result in the lines getting mixed up.
     """
     # Explicitly ending the string with a newline '\n' character, instead
     # of letting the print statement end it for you (end='\n'), fixes the
