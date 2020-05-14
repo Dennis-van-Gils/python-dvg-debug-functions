@@ -72,7 +72,6 @@ setup(
     extras_require={
         'dev': [
             'pytest-cov',
-            'pytest-xdist',
         ]
         # eg:
         #   'rst': ['docutils>=0.11'],
