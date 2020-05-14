@@ -29,7 +29,8 @@ install:
   - pip install coveralls
 
 script:
-  - coverage run --source=src -m pytest
+  #- coverage run --source=src -m pytest
+  - pytest --cov src
     
 after_sucess:
   - coverage combine
