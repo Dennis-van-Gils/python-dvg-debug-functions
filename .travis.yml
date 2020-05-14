@@ -10,7 +10,8 @@ install:
   - pip install coveralls
 
 script:
-  - coverage run -m pytest
+  - coverage run --source=src -m pytest
     
 after_sucess:
+  coverage report -m
   coveralls
