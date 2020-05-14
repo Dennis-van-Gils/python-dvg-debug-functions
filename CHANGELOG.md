@@ -1,4 +1,3 @@
-
 Changelog
 =========
 
@@ -6,3 +5,8 @@ Changelog
 ------------------
 
 * First release on PyPI.
+
+1.0.0 (2020-05-14)
+------------------
+
+* Updated comments.

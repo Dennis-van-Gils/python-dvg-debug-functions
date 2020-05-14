@@ -25,7 +25,7 @@ def read(*names, **kwargs):
 
 setup(
     name='dvg-debug-functions',
-    version='0.0.1',
+    version='1.0.0',
     license='MIT',
     description='Functions to neatly print debug information to the terminal output, well-suited for multithreaded programs.',
     long_description='%s\n%s' % (
@@ -43,7 +43,7 @@ setup(
     zip_safe=False,
     classifiers=[
         # complete classifier list: http://pypi.python.org/pypi?%3Aaction=list_classifiers
-        #'Development Status :: 5 - Production/Stable',
+        'Development Status :: 5 - Production/Stable',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: MIT License',
         'Operating System :: OS Independent',
