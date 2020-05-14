@@ -1,6 +1,6 @@
-[![PyPI version](https://badge.fury.io/py/dvg-debug-functions.svg?kill_cache=1)](https://badge.fury.io/py/dvg-debug-functions)
-[![Build Status](https://travis-ci.org/Dennis-van-Gils/python-dvg-debug-functions.svg?branch=master&kill_cache=1)](https://travis-ci.org/Dennis-van-Gils/python-dvg-debug-functions)
-[![Coverage Status](https://coveralls.io/repos/github/Dennis-van-Gils/python-dvg-debug-functions/badge.svg?branch=master&kill_cache=1)](https://coveralls.io/github/Dennis-van-Gils/python-dvg-debug-functions?branch=master)
+[![PyPI version](https://badge.fury.io/py/dvg-debug-functions.svg?kill_cache=3)](https://badge.fury.io/py/dvg-debug-functions)
+[![Build Status](https://travis-ci.org/Dennis-van-Gils/python-dvg-debug-functions.svg?branch=master&kill_cache=3)](https://travis-ci.org/Dennis-van-Gils/python-dvg-debug-functions)
+[![Coverage Status](https://coveralls.io/repos/github/Dennis-van-Gils/python-dvg-debug-functions/badge.svg?branch=master&kill_cache=3)](https://coveralls.io/github/Dennis-van-Gils/python-dvg-debug-functions?branch=master)
 
 # DvG_debug_functions
 Provides functions for printing debug information to the terminal output.
