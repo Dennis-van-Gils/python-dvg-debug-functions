@@ -25,7 +25,7 @@ jobs:
 
 install:
   - pip install coveralls
-  - pip install -e .
+  - pip install -e .[dev]
 
 script:
   #- coverage run --source=src -m pytest
