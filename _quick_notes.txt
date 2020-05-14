@@ -1,3 +1,5 @@
+pip install pytest-cov
+
 python setup.py bdist_wheel
 pip install -e .
 pytest
