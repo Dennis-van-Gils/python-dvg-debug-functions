@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/Dennis-van-Gils/python-dvg-debug-functions.svg?branch=master)](https://travis-ci.org/Dennis-van-Gils/python-dvg-debug-functions)
+
 # DvG_debug_functions
 Provides functions for printing debug information to the terminal output.
 
