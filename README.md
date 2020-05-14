@@ -1,3 +1,4 @@
+[![PyPI version](https://badge.fury.io/py/dvg-debug-functions.svg)](https://badge.fury.io/py/dvg-debug-functions)
 [![Build Status](https://travis-ci.org/Dennis-van-Gils/python-dvg-debug-functions.svg?branch=master)](https://travis-ci.org/Dennis-van-Gils/python-dvg-debug-functions)
 
 # DvG_debug_functions
