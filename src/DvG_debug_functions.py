@@ -8,6 +8,10 @@ Functions:
         'Debug' print a single line to the terminal with optional ANSI color
         codes. Particularly well-suited for multithreaded PyQt programs where
         multiple threads are printing information to the same terminal.
+        
+    tprint(...):
+        Identical to dprint(...), but now prepended with a time.perf_counter()
+        timestamp.
 
     print_fancy_traceback(...):
         Prints the exception to the terminal, using ANSI color codes that mimic
@@ -16,11 +20,12 @@ Functions:
 __author__      = "Dennis van Gils"
 __authoremail__ = "vangils.dennis@gmail.com"
 __url__         = "https://github.com/Dennis-van-Gils/python-dvg-debug-functions"
-__date__        = "14-05-2020"
-__version__     = "1.0.1"
+__date__        = "04-06-2020"
+__version__     = "1.1.0"
 
 import os
 import sys
+import time
 
 try:
     from PyQt5 import QtCore
@@ -75,6 +80,12 @@ def dprint(str_msg, ANSI_color=None):
     sys.stdout.flush()
     
     if PYQT5_IS_PRESENT: locker.unlock()
+
+def tprint(str_msg, ANSI_color=None):
+    """Identical to dprint(...), but now prepended with a time.perf_counter()
+    timestamp
+    """
+    dprint("%.4f %s" % (time.perf_counter(), str_msg), ANSI_color)
 
 def print_fancy_traceback(err, back=3):
     """Print the exception `err` to the terminal with a traceback that is

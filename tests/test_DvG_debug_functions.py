@@ -1,4 +1,4 @@
-from DvG_debug_functions import dprint, ANSI, print_fancy_traceback as pft
+from DvG_debug_functions import dprint, tprint, ANSI, print_fancy_traceback as pft
 from unittest import mock
 import io
 
@@ -18,6 +18,14 @@ def test_dprint_in_red():
 
     assert fake_stdout.getvalue() == '\x1b[1;31mIn red\x1b[1;37m\n'
     
+
+
+def test_tprint():
+    with mock.patch('sys.stdout', new=io.StringIO()) as fake_stdout:
+        tprint("No color")
+
+    assert fake_stdout.getvalue()[-9:] == 'No color\n'
+
 
 
 def test_pft():
