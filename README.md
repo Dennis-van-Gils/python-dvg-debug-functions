@@ -13,6 +13,12 @@ dprint(str_msg, ANSI_color=None)
 
 There is a lot of overhead using this print statement, but it is particularly well-suited for multithreaded PyQt programs where multiple threads are each printing information to the same terminal. The `dprint` function ensures that each line sent to the terminal will remain as a continious single line, whereas a regular `print` statement will likely result in the lines getting mixed up.
 
+# tprint()
+```Python
+tprint(str_msg, ANSI_color=None) 
+````
+Identical to `dprint(...)`, but now prepended with a `time.perf_counter()` timestamp.
+
 # print_fancy_traceback()
 ```Python
 print_fancy_traceback(err, back=3)
