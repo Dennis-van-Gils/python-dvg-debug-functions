@@ -20,8 +20,8 @@ Functions:
 __author__      = "Dennis van Gils"
 __authoremail__ = "vangils.dennis@gmail.com"
 __url__         = "https://github.com/Dennis-van-Gils/python-dvg-debug-functions"
-__date__        = "04-06-2020"
-__version__     = "1.1.0"
+__date__        = "06-06-2020"
+__version__     = "1.1.1"
 
 import os
 import sys
