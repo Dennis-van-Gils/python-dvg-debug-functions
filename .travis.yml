@@ -33,3 +33,6 @@ after_success:
   #- coverage combine .coverage
   - coverage report -m
   - coveralls
+
+notifications:
+  webhooks: https://coveralls.io/webhook
