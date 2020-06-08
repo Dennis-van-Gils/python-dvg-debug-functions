@@ -27,6 +27,7 @@ install:
 script:
   #- coverage run -p --source=src -m pytest
   #- PYTHONPATH=src pytest --cov src --cov-append
+  - COVERALLS_PARALLEL=true coveralls
   - pytest --cov src --cov-append
     
 after_success:
