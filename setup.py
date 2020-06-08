@@ -59,12 +59,8 @@ setup(
     project_urls={
         "Issue Tracker": "https://github.com/Dennis-van-Gils/python-dvg-debug-functions/issues",
     },
-    keywords=[
-        # eg: 'keyword1', 'keyword2', 'keyword3',
-    ],
+    keywords=[],
     python_requires=">=3.6",
-    install_requires=[
-        # eg: 'aspectlib==1.1.1', 'six>=1.7',
-    ],
-    extras_require={"dev": ["pytest-cov",]},
+    install_requires=[],
+    extras_require={},
 )

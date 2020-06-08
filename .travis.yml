@@ -22,7 +22,7 @@ jobs:
 install:
   - pip install pytest-cov
   - pip install coveralls
-  - pip install -e .[dev]
+  - pip install -e .
 
 script:
   - pytest --cov src -s
