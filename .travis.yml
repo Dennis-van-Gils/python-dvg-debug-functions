@@ -31,6 +31,6 @@ script:
     
 after_success:
   #- coverage combine
-  #- coverage combine .coverage
+  - coverage combine .coverage
   - coverage report -m
   - coveralls
