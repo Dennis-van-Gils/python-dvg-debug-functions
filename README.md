@@ -1,6 +1,9 @@
-[![PyPI version](https://badge.fury.io/py/dvg-debug-functions.svg?kill_cache=4)](https://badge.fury.io/py/dvg-debug-functions)
-[![Build Status](https://travis-ci.org/Dennis-van-Gils/python-dvg-debug-functions.svg?branch=master&kill_cache=4)](https://travis-ci.org/Dennis-van-Gils/python-dvg-debug-functions)
-[![Coverage Status](https://coveralls.io/repos/github/Dennis-van-Gils/python-dvg-debug-functions/badge.svg?branch=master&kill_cache=4)](https://coveralls.io/github/Dennis-van-Gils/python-dvg-debug-functions?branch=master)
+[![PyPI](https://img.shields.io/pypi/v/dvg-debug-functions)](https://pypi.org/project/dvg-debug-functions)
+[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/dvg-debug-functions)](https://pypi.org/project/dvg-debug-functions)
+[![Build Status](https://travis-ci.org/Dennis-van-Gils/python-dvg-debug-functions.svg?branch=master)](https://travis-ci.org/Dennis-van-Gils/python-dvg-debug-functions)
+[![Coverage Status](https://coveralls.io/repos/github/Dennis-van-Gils/python-dvg-debug-functions/badge.svg?branch=master)](https://coveralls.io/github/Dennis-van-Gils/python-dvg-debug-functions?branch=master)
+[![License: MIT](https://img.shields.io/badge/License-MIT-purple.svg)](https://github.com/Dennis-van-Gils/python-dvg-debug-functions/blob/master/LICENSE.txt)
+[![CodeStyle: Black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
 # DvG_debug_functions
 Provides functions for printing debug information to the terminal output.
