@@ -21,16 +21,16 @@ jobs:
 
 install:
   - pip install pytest-cov
-  - pip install coveralls
+  - pip install coveralls[yaml]
   - pip install -e .[dev]
 
 script:
   #- coverage run -p --source=src -m pytest
   #- PYTHONPATH=src pytest --cov src --cov-append
-  - pytest --cov src --cov-append
+  - pytest --cov src -s
     
 after_success:
-  - coverage combine
+  #- coverage combine
   #- coverage combine .coverage
   - coverage report -m
   - coveralls
