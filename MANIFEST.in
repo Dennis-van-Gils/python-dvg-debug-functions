@@ -2,15 +2,14 @@ graft docs
 graft src
 graft tests
 
-include .bumpversion.cfg
+recursive-exclude docs/_build *
+recursive-exclude docs/_themes *
+
 include .coveragerc
-include .cookiecutterrc
-include .editorconfig
+include .travis.yml .readthedocs.yml
 
 include LICENSE.txt
-include *.md
+include *.rst
 recursive-include images *.png
-
-include tox.ini .travis.yml .appveyor.yml .readthedocs.yml .pre-commit-config.yaml
 
 global-exclude *.py[cod] __pycache__/* *.so *.dylib
