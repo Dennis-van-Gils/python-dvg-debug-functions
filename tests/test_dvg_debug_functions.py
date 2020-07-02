@@ -1,4 +1,4 @@
-from DvG_debug_functions import (
+from dvg_debug_functions import (
     dprint,
     tprint,
     ANSI,
