@@ -6,9 +6,6 @@
     :target: https://travis-ci.org/Dennis-van-Gils/python-dvg-debug-functions
 .. image:: https://coveralls.io/repos/github/Dennis-van-Gils/python-dvg-debug-functions/badge.svg?branch=master
     :target: https://coveralls.io/github/Dennis-van-Gils/python-dvg-debug-functions?branch=master
-.. image:: https://requires.io/github/Dennis-van-Gils/python-dvg-debug-functions/requirements.svg?branch=master
-     :target: https://requires.io/github/Dennis-van-Gils/python-dvg-debug-functions/requirements/?branch=master
-     :alt: Requirements Status
 .. image:: https://img.shields.io/badge/code%20style-black-000000.svg
     :target: https://github.com/psf/black
 .. image:: https://img.shields.io/badge/License-MIT-purple.svg
