@@ -70,8 +70,8 @@ For merging, you should:
 
 1. Include passing tests [1]_.
 2. Update documentation when there's new API, functionality etc.
-3. Add a note to ``CHANGELOG.md`` about the changes.
-4. Add yourself to ``AUTHORS.md``.
+3. Add a note to ``CHANGELOG.rst`` about the changes.
+4. Add yourself to ``AUTHORS.rst``.
 
 .. [1] You can rely on Travis - it will
        `run the tests <https://travis-ci.org/github/Dennis-van-Gils/python-dvg-debug-functions/pull_requests>`_ for each change you add in the pull request.
