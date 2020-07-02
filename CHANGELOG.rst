@@ -17,6 +17,6 @@ Changelog
 ------------------
 * Code style: black
 
-1.1.3 (2020-07-02)
+2.0.0 (2020-07-02)
 ------------------
 * DvG module filenames changed to lowercase
