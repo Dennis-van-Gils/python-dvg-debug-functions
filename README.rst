@@ -1,34 +1,49 @@
-[![PyPI](https://img.shields.io/pypi/v/dvg-debug-functions)](https://pypi.org/project/dvg-debug-functions)
-[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/dvg-debug-functions)](https://pypi.org/project/dvg-debug-functions)
-[![Build Status](https://travis-ci.org/Dennis-van-Gils/python-dvg-debug-functions.svg?branch=master)](https://travis-ci.org/Dennis-van-Gils/python-dvg-debug-functions)
-[![Coverage Status](https://coveralls.io/repos/github/Dennis-van-Gils/python-dvg-debug-functions/badge.svg?branch=master)](https://coveralls.io/github/Dennis-van-Gils/python-dvg-debug-functions?branch=master)
-[![License: MIT](https://img.shields.io/badge/License-MIT-purple.svg)](https://github.com/Dennis-van-Gils/python-dvg-debug-functions/blob/master/LICENSE.txt)
-[![CodeStyle: Black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+.. image:: https://img.shields.io/pypi/v/dvg-debug-functions
+    :target: https://pypi.org/project/dvg-debug-functions
+.. image:: https://img.shields.io/pypi/pyversions/dvg-debug-functions
+    :target: https://pypi.org/project/dvg-debug-functions
+.. image:: https://travis-ci.org/Dennis-van-Gils/python-dvg-debug-functions.svg?branch=master
+    :target: https://travis-ci.org/Dennis-van-Gils/python-dvg-debug-functions
+.. image:: https://coveralls.io/repos/github/Dennis-van-Gils/python-dvg-debug-functions/badge.svg?branch=master
+    :target: https://coveralls.io/github/Dennis-van-Gils/python-dvg-debug-functions?branch=master
+.. image:: https://requires.io/github/Dennis-van-Gils/python-dvg-debug-functions/requirements.svg?branch=master
+     :target: https://requires.io/github/Dennis-van-Gils/python-dvg-debug-functions/requirements/?branch=master
+     :alt: Requirements Status
+.. image:: https://img.shields.io/badge/code%20style-black-000000.svg
+    :target: https://github.com/psf/black
+.. image:: https://img.shields.io/badge/License-MIT-purple.svg
+    :target: https://github.com/Dennis-van-Gils/python-dvg-debug-functions/blob/master/LICENSE.txt
 
-# DvG_debug_functions
+DvG_debug_functions
+===================
 Provides functions for printing debug information to the terminal output.
 
-# dprint()
-```Python
-dprint(str_msg, ANSI_color=None) 
-````
+dprint()
+--------
+::
+  
+  dprint(str_msg, ANSI_color=None) 
+
 'Debug' print a single line to the terminal with optional ANSI color codes. The line will be terminated with a newline character and the terminal output buffer is forced to flush before and after every print. In addition, if PyQt5 is present in the Python environment, then a mutex lock will be obtained and released again for each dprint execution.
 
-There is a lot of overhead using this print statement, but it is particularly well-suited for multithreaded PyQt programs where multiple threads are each printing information to the same terminal. The `dprint` function ensures that each line sent to the terminal will remain as a continious single line, whereas a regular `print` statement will likely result in the lines getting mixed up.
+There is a lot of overhead using this print statement, but it is particularly well-suited for multithreaded PyQt programs where multiple threads are each printing information to the same terminal. The ``dprint()`` function ensures that each line sent to the terminal will remain as a continious single line, whereas a regular ``print()`` statement will likely result in the lines getting mixed up.
 
-# tprint()
-```Python
-tprint(str_msg, ANSI_color=None) 
-````
-Identical to `dprint(...)`, but now prepended with a `time.perf_counter()` timestamp.
+tprint()
+--------
+::
 
-# print_fancy_traceback()
-```Python
-print_fancy_traceback(err, back=3)
-```
-Prints the exception `err` to the terminal with a traceback that is `back` deep, using ANSI color codes that mimic the IPython command shell.
+  tprint(str_msg, ANSI_color=None) 
+
+Identical to ``dprint()``, but now prepended with a ``time.perf_counter()`` timestamp.
+
+print_fancy_traceback()
+-----------------------
+::
+
+  print_fancy_traceback(err, back=3)
+
+Prints the exception ``err`` to the terminal with a traceback that is ``back`` deep, using ANSI color codes that mimic the IPython command shell.
 
 Example output:
 
-![print_fancy_traceback.png](https://raw.githubusercontent.com/Dennis-van-Gils/python-dvg-debug-functions/master/images/print_fancy_traceback.png)
-
+.. image:: images/print_fancy_traceback.png
