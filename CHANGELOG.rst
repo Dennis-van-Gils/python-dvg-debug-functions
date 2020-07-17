@@ -1,22 +1,26 @@
 Changelog
 =========
 
-0.0.1 (2020-05-13)
+2.1.0 (2020-07-17)
 ------------------
-* First release on PyPI.
+* Improved `print_fancy_traceback()`
 
-1.1.0 (2020-06-04)
+2.0.0 (2020-07-02)
 ------------------
-* Added `tprint(...)`
-
-1.1.1 (2020-06-06)
-------------------
-* Extended README
+* DvG module filenames changed to lowercase
 
 1.1.2 (2020-06-08)
 ------------------
 * Code style: black
 
-2.0.0 (2020-07-02)
+1.1.1 (2020-06-06)
 ------------------
-* DvG module filenames changed to lowercase
+* Extended README
+
+1.1.0 (2020-06-04)
+------------------
+* Added `tprint(...)`
+
+0.0.1 (2020-05-13)
+------------------
+* First release on PyPI.

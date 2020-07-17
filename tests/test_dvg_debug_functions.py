@@ -71,18 +71,3 @@ def test_pft():
     except ZeroDivisionError as err:
         with mock.patch("sys.stdout", new=io.StringIO()) as fake_stdout:
             pft(err, 1)
-
-
-def test_pft_descr_abbr():
-    try:
-        0 / 0
-    except ZeroDivisionError as err:
-        err.abbreviation = "abbr"
-        err.description = "descr"
-        with mock.patch("sys.stdout", new=io.StringIO()) as fake_stdout:
-            pft(err, 1)
-
-        assert (
-            fake_stdout.getvalue().split("\n")[-2]
-            == "\x1b[1;31mZeroDivisionError: \x1b[1;37mabbr: descr"
-        )

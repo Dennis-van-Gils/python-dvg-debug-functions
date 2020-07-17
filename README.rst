@@ -21,9 +21,18 @@ dprint()
   
   dprint(str_msg, ANSI_color=None) 
 
-'Debug' print a single line to the terminal with optional ANSI color codes. The line will be terminated with a newline character and the terminal output buffer is forced to flush before and after every print. In addition, if PyQt5 is present in the Python environment, then a mutex lock will be obtained and released again for each dprint execution.
+'Debug' print a single line to the terminal with optional ANSI color codes. The
+line will be terminated with a newline character and the terminal output buffer
+is forced to flush before and after every print. In addition, if PyQt5 is
+present in the Python environment, then a mutex lock will be obtained and
+released again for each dprint execution.
 
-There is a lot of overhead using this print statement, but it is particularly well-suited for multithreaded PyQt programs where multiple threads are each printing information to the same terminal. The ``dprint()`` function ensures that each line sent to the terminal will remain as a continious single line, whereas a regular ``print()`` statement will likely result in the lines getting mixed up.
+There is a lot of overhead using this print statement, but it is particularly
+well-suited for multithreaded PyQt programs where multiple threads are each
+printing information to the same terminal. The ``dprint()`` function ensures
+that each line sent to the terminal will remain as a continious single line,
+whereas a regular ``print()`` statement will likely result in the lines getting
+mixed up.
 
 tprint()
 --------
@@ -31,7 +40,8 @@ tprint()
 
   tprint(str_msg, ANSI_color=None) 
 
-Identical to ``dprint()``, but now prepended with a ``time.perf_counter()`` timestamp.
+Identical to ``dprint()``, but now prepended with a ``time.perf_counter()``
+timestamp.
 
 print_fancy_traceback()
 -----------------------
@@ -39,7 +49,19 @@ print_fancy_traceback()
 
   print_fancy_traceback(err, back=3)
 
-Prints the exception ``err`` to the terminal with a traceback that is ``back`` deep, using ANSI color codes that mimic the IPython command shell.
+Print an Exception traceback or the current regular call stack to the terminal,
+using ANSI color codes that mimic the IPython command shell.
+
+    Args:
+        err (``Exception`` | ``str`` | ``None``):
+            When ``err`` is of type ``Exception``, then an Exception traceback
+            will be printed. When ``err`` is of another type, then the current
+            regular call stack will be printed.
+
+        back (``int``):
+            Depth of the traceback or call stack to print.
+
+            Default: 3
 
 Example output:
 
