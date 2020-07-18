@@ -1,6 +1,10 @@
 Changelog
 =========
 
+2.1.1 (2020-07-18)
+------------------
+* Added flag `show_full_paths` to `print_fancy_traceback()`
+
 2.1.0 (2020-07-17)
 ------------------
 * Improved `print_fancy_traceback()`

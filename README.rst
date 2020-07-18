@@ -15,54 +15,72 @@ DvG_debug_functions
 ===================
 Provides functions for printing debug information to the terminal output.
 
-dprint()
---------
-::
-  
-  dprint(str_msg, ANSI_color=None) 
 
-'Debug' print a single line to the terminal with optional ANSI color codes. The
-line will be terminated with a newline character and the terminal output buffer
-is forced to flush before and after every print. In addition, if PyQt5 is
-present in the Python environment, then a mutex lock will be obtained and
-released again for each dprint execution.
+`print_fancy_traceback(err=None, back: int = 3, show_full_paths: bool = False)`
+--------------------------------------------------------------------------------------
 
-There is a lot of overhead using this print statement, but it is particularly
-well-suited for multithreaded PyQt programs where multiple threads are each
-printing information to the same terminal. The ``dprint()`` function ensures
-that each line sent to the terminal will remain as a continious single line,
-whereas a regular ``print()`` statement will likely result in the lines getting
-mixed up.
+Print the exception or the current regular call-stack traceback to the
+terminal, using ANSI color codes that mimic the IPython command shell.
 
-tprint()
---------
-::
+Args:
+    err (`Exception` | `str` | `None`, optional):
+        When `err` is of type `Exception`, then an exception traceback will
+        be printed. When `err` is of another type, then the current regular
+        call-stack traceback will be printed.
 
-  tprint(str_msg, ANSI_color=None) 
+        Default: `None`
 
-Identical to ``dprint()``, but now prepended with a ``time.perf_counter()``
-timestamp.
+    back (`int`, optional):
+        Depth of the traceback to print.
 
-print_fancy_traceback()
------------------------
-::
+        Default: `3`
 
-  print_fancy_traceback(err, back=3)
+    show_full_paths (`bool`, optional):
+        Shows the full filepath in the traceback when True, otherwise just
+        the filename.
 
-Print an Exception traceback or the current regular call stack to the terminal,
-using ANSI color codes that mimic the IPython command shell.
-
-    Args:
-        err (``Exception`` | ``str`` | ``None``):
-            When ``err`` is of type ``Exception``, then an Exception traceback
-            will be printed. When ``err`` is of another type, then the current
-            regular call stack will be printed.
-
-        back (``int``):
-            Depth of the traceback or call stack to print.
-
-            Default: 3
+        Default: `False`
 
 Example output:
 
 .. image:: images/print_fancy_traceback.png
+
+
+`dprint(str_msg: str, ANSI_color: str = None)`
+--------------------------------------------------
+
+'Debug' print a single line to the terminal with optional ANSI color
+codes. The line will be terminated with a newline character and the
+terminal output buffer is forced to flush before and after every print.
+In addition, if PyQt5 is present in the Python environment, then a mutex
+lock will be obtained and released again for each dprint execution.
+
+There is a lot of overhead using this print statement, but it is
+particularly well-suited for multithreaded PyQt programs where multiple
+threads are each printing information to the same terminal. The `dprint()`
+function ensure that each line sent to the terminal will remain as a
+continious single line, whereas a regular `print()` statement will likely
+result in the lines getting mixed up.
+
+
+`tprint(str_msg, ANSI_color: str = None)`
+---------------------------------------------
+
+Identical to `dprint()`, but now prepended with a `time.perf_counter()`
+timestamp
+
+`ANSI`
+------
+
+::
+
+    class ANSI:
+        NONE    = ""
+        RED     = "\033[1;31m"
+        GREEN   = "\033[1;32m"
+        YELLOW  = "\033[1;33m"
+        BLUE    = "\033[1;34m"
+        PURPLE  = "\033[1;35m"  # aka MAGENTA
+        MAGENTA = "\033[1;35m"
+        CYAN    = "\033[1;36m"
+        WHITE   = "\033[1;37m"

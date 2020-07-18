@@ -1,27 +1,13 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """Provides functions for neatly printing debug information to the terminal
-output, especially well-suited for multithreaded programs.
-
-Functions:
-    dprint(...):
-        'Debug' print a single line to the terminal with optional ANSI color
-        codes. Particularly well-suited for multithreaded PyQt programs where
-        multiple threads are printing information to the same terminal.
-
-    tprint(...):
-        Identical to dprint(...), but now prepended with a time.perf_counter()
-        timestamp.
-
-    print_fancy_traceback(...):
-        Print an Exception traceback or the current regular call stack to the
-        terminal, using ANSI color codes that mimic the IPython command shell.
+output, well-suited for multithreaded programs.
 """
 __author__ = "Dennis van Gils"
 __authoremail__ = "vangils.dennis@gmail.com"
 __url__ = "https://github.com/Dennis-van-Gils/python-dvg-debug-functions"
-__date__ = "17-07-2020"
-__version__ = "2.1.0"
+__date__ = "18-07-2020"
+__version__ = "2.1.1"
 
 import os
 import sys
@@ -37,6 +23,10 @@ else:
     PYQT5_IS_PRESENT = True
     dprint_mutex = QtCore.QMutex()
 
+# Setting this global module variable to `True` or `False` will overrule the
+# argument `show_full_paths` in `print_fancy_traceback()`.
+OVERRULE_SHOW_FULL_PATHS = None
+
 
 class ANSI:
     NONE = ""
@@ -50,7 +40,7 @@ class ANSI:
     WHITE = "\033[1;37m"
 
 
-def dprint(str_msg, ANSI_color=None):
+def dprint(str_msg: str, ANSI_color: str = None):
     """'Debug' print a single line to the terminal with optional ANSI color
     codes. The line will be terminated with a newline character and the
     terminal output buffer is forced to flush before and after every print.
@@ -59,9 +49,9 @@ def dprint(str_msg, ANSI_color=None):
 
     There is a lot of overhead using this print statement, but it is
     particularly well-suited for multithreaded PyQt programs where multiple
-    threads are each printing information to the same terminal. The dprint
+    threads are each printing information to the same terminal. The `dprint()`
     function ensure that each line sent to the terminal will remain as a
-    continious single line, whereas a regular print statement will likely
+    continious single line, whereas a regular `print()` statement will likely
     result in the lines getting mixed up.
     """
     # Explicitly ending the string with a newline '\n' character, instead
@@ -89,39 +79,38 @@ def dprint(str_msg, ANSI_color=None):
         locker.unlock()
 
 
-def tprint(str_msg, ANSI_color=None):
-    """Identical to dprint(...), but now prepended with a time.perf_counter()
-    timestamp
+def tprint(str_msg: str, ANSI_color: str = None):
+    """Identical to `dprint()`, but now prepended with a `time.perf_counter()`
+    timestamp.
     """
     dprint("%.4f %s" % (time.perf_counter(), str_msg), ANSI_color)
 
 
-def print_fancy_traceback(err=None, back=3):
-    """Print an Exception traceback or the current regular call stack to the
+def print_fancy_traceback(
+    err=None, back: int = 3, show_full_paths: bool = False
+):
+    """Print the exception or the current regular call-stack traceback to the
     terminal, using ANSI color codes that mimic the IPython command shell.
 
     Args:
-        err (:class:`Exception` | :obj:`str` | :obj:`None`):
-            When `err` is of type :class:`Exception`, then an Exception
-            traceback will be printed. When `err` is of another type, then
-            the current regular call stack will be printed.
+        err (`Exception` | `str` | `None`, optional):
+            When `err` is of type `Exception`, then an exception traceback will
+            be printed. When `err` is of another type, then the current regular
+            call-stack traceback will be printed.
 
-            Default: :obj:`None`
+            Default: `None`
 
-        back (:obj:`int`):
-            Depth of the traceback or call stack to print.
+        back (`int`, optional):
+            Depth of the traceback to print.
 
-            Default: :const:`3`
+            Default: `3`
+
+        show_full_paths (`bool`, optional):
+            Shows the full filepath in the traceback when True, otherwise just
+            the filename.
+
+            Default: `False`
     """
-    print(
-        "\n"
-        + ANSI.WHITE
-        + "Fancy traceback "
-        + ANSI.CYAN
-        + "(most recent call last)"
-        + ANSI.WHITE
-        + ":"
-    )
 
     def print_frame(filename, line_no, frame_name):
         print(
@@ -143,15 +132,37 @@ def print_fancy_traceback(err=None, back=3):
             % (filename, line_no, frame_name)
         )
 
+    print(
+        "\n"
+        + ANSI.WHITE
+        + "Fancy traceback "
+        + ANSI.CYAN
+        + "(most recent call last)"
+        + ANSI.WHITE
+        + ":"
+    )
+
     if isinstance(err, Exception):
+        # Exception traceback
         etype, evalue, tb = sys.exc_info()
         stack = traceback.extract_tb(tb)
         stack = stack[-back:]
 
         for frame in stack:
-            print_frame(
-                os.path.basename(frame.filename), frame.lineno, frame.name
-            )
+            if OVERRULE_SHOW_FULL_PATHS is not None:
+                file_descr = (
+                    frame.filename
+                    if OVERRULE_SHOW_FULL_PATHS
+                    else os.path.basename(frame.filename)
+                )
+            else:
+                file_descr = (
+                    frame.filename
+                    if show_full_paths
+                    else os.path.basename(frame.filename)
+                )
+
+            print_frame(file_descr, frame.lineno, frame.name)
 
         print("----> %s" % stack[-1].line)
         print(
@@ -159,14 +170,26 @@ def print_fancy_traceback(err=None, back=3):
         )
 
     else:
+        # Regular call stack traceback
         stack = inspect.stack()
         stack.reverse()
         stack = stack[-back - 1 : -1]
 
         for frame in stack:
-            print_frame(
-                os.path.basename(frame.filename), frame.lineno, frame.function
-            )
+            if OVERRULE_SHOW_FULL_PATHS is not None:
+                file_descr = (
+                    frame.filename
+                    if OVERRULE_SHOW_FULL_PATHS
+                    else os.path.basename(frame.filename)
+                )
+            else:
+                file_descr = (
+                    frame.filename
+                    if show_full_paths
+                    else os.path.basename(frame.filename)
+                )
+
+            print_frame(file_descr, frame.lineno, frame.function)
 
         if isinstance(err, str):
             print((ANSI.RED + "Error: " + ANSI.WHITE + "%s") % err)

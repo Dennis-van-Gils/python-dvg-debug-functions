@@ -24,7 +24,7 @@ def read(*names, **kwargs):
 
 setup(
     name="dvg-debug-functions",
-    version="2.1.0",
+    version="2.1.1",
     license="MIT",
     description="Functions to neatly print debug information to the terminal output, well-suited for multithreaded programs.",
     long_description="%s\n%s"
@@ -59,7 +59,13 @@ setup(
     project_urls={
         "Issue Tracker": "https://github.com/Dennis-van-Gils/python-dvg-debug-functions/issues",
     },
-    keywords=[],
+    keywords=[
+        "multithread",
+        "traceback",
+        "debugging",
+        "utility",
+        "fancy",
+        ],
     python_requires=">=3.6",
     install_requires=[],
     extras_require={},
