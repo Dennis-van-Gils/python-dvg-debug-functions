@@ -16,38 +16,38 @@ DvG_debug_functions
 Provides functions for printing debug information to the terminal output.
 
 
-`print_fancy_traceback(err=None, back: int = 3, show_full_paths: bool = False)`
---------------------------------------------------------------------------------------
+``print_fancy_traceback(err=None, back: int = 3, show_full_paths: bool = False)``
+----------------------------------------------------------------------------------------
 
 Print the exception or the current regular call-stack traceback to the
 terminal, using ANSI color codes that mimic the IPython command shell.
 
 Args:
-    err (`Exception` | `str` | `None`, optional):
-        When `err` is of type `Exception`, then an exception traceback will
-        be printed. When `err` is of another type, then the current regular
+    err (``Exception`` | ``str`` | ``None``, optional):
+        When ``err`` is of type ``Exception``, then an exception traceback will
+        be printed. When ``err`` is of another type, then the current regular
         call-stack traceback will be printed.
 
-        Default: `None`
+        Default: ``None``
 
-    back (`int`, optional):
+    back (``int``, optional):
         Depth of the traceback to print.
 
-        Default: `3`
+        Default: ``3``
 
-    show_full_paths (`bool`, optional):
+    show_full_paths (``bool``, optional):
         Shows the full filepath in the traceback when True, otherwise just
         the filename.
 
-        Default: `False`
+        Default: ``False``
 
 Example output:
 
 .. image:: images/print_fancy_traceback.png
 
 
-`dprint(str_msg: str, ANSI_color: str = None)`
---------------------------------------------------
+``dprint(str_msg: str, ANSI_color: str = None)``
+----------------------------------------------------
 
 'Debug' print a single line to the terminal with optional ANSI color
 codes. The line will be terminated with a newline character and the
@@ -57,20 +57,20 @@ lock will be obtained and released again for each dprint execution.
 
 There is a lot of overhead using this print statement, but it is
 particularly well-suited for multithreaded PyQt programs where multiple
-threads are each printing information to the same terminal. The `dprint()`
+threads are each printing information to the same terminal. The ``dprint()``
 function ensure that each line sent to the terminal will remain as a
-continious single line, whereas a regular `print()` statement will likely
+continious single line, whereas a regular ``print()`` statement will likely
 result in the lines getting mixed up.
 
 
-`tprint(str_msg, ANSI_color: str = None)`
----------------------------------------------
+``tprint(str_msg, ANSI_color: str = None)``
+-----------------------------------------------
 
-Identical to `dprint()`, but now prepended with a `time.perf_counter()`
+Identical to ``dprint()``, but now prepended with a ``time.perf_counter()``
 timestamp
 
-`ANSI`
-------
+``ANSI``
+--------
 
 ::
 
