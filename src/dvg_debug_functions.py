@@ -42,17 +42,17 @@ class ANSI:
 
 def dprint(str_msg: str, ANSI_color: str = None):
     """'Debug' print a single line to the terminal with optional ANSI color
-    codes. The line will be terminated with a newline character and the
-    terminal output buffer is forced to flush before and after every print.
-    In addition, if PyQt5 is present in the Python environment, then a mutex
-    lock will be obtained and released again for each dprint execution.
-
-    There is a lot of overhead using this print statement, but it is
+    codes. There is a lot of overhead using this print statement, but it is
     particularly well-suited for multithreaded PyQt programs where multiple
-    threads are each printing information to the same terminal. The `dprint()`
+    threads are each printing information to the same terminal. The ``dprint()``
     function ensure that each line sent to the terminal will remain as a
-    continious single line, whereas a regular `print()` statement will likely
+    continious single line, whereas a regular ``print()`` statement will likely
     result in the lines getting mixed up.
+    
+    The line will be terminated with a newline character and the terminal output
+    buffer is forced to flush before and after every print. In addition, if
+    PyQt5 is present in the Python environment, then a mutex lock will be
+    obtained and released again for each ``dprint()`` execution.
     """
     # Explicitly ending the string with a newline '\n' character, instead
     # of letting the print statement end it for you (end='\n'), fixes the
@@ -80,7 +80,7 @@ def dprint(str_msg: str, ANSI_color: str = None):
 
 
 def tprint(str_msg: str, ANSI_color: str = None):
-    """Identical to `dprint()`, but now prepended with a `time.perf_counter()`
+    """Identical to ``dprint()``, but now prepended with a ``time.perf_counter()``
     timestamp.
     """
     dprint("%.4f %s" % (time.perf_counter(), str_msg), ANSI_color)
@@ -93,23 +93,23 @@ def print_fancy_traceback(
     terminal, using ANSI color codes that mimic the IPython command shell.
 
     Args:
-        err (`Exception` | `str` | `None`, optional):
-            When `err` is of type `Exception`, then an exception traceback will
-            be printed. When `err` is of another type, then the current regular
+        err (``Exception`` | ``str`` | ``None``, optional):
+            When ``err`` is of type ``Exception``, then an exception traceback will
+            be printed. When ``err`` is of another type, then the current regular
             call-stack traceback will be printed.
 
-            Default: `None`
+            Default: ``None``
 
-        back (`int`, optional):
+        back (``int``, optional):
             Depth of the traceback to print.
 
-            Default: `3`
+            Default: ``3``
 
-        show_full_paths (`bool`, optional):
+        show_full_paths (``bool``, optional):
             Shows the full filepath in the traceback when True, otherwise just
             the filename.
 
-            Default: `False`
+            Default: ``False``
     """
 
     def print_frame(filename, line_no, frame_name):
