@@ -13,7 +13,7 @@
 
 DvG_debug_functions
 ===================
-Provides functions for printing debug information to the terminal output.
+*Provides functions for printing debug information to the terminal output.*
 
 - Github: https://github.com/Dennis-van-Gils/python-dvg-debug-functions
 - PyPI: https://pypi.org/project/dvg-debug-functions
