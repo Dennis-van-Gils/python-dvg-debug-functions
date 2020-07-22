@@ -22,6 +22,9 @@ Installation:
 
     ``pip install dvg-debug-functions``
 
+API
+===
+
 Functions
 ---------
 * ``print_fancy_traceback(err=None, back: int = 3, show_full_paths: bool = False)``
