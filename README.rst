@@ -18,9 +18,9 @@ DvG_debug_functions
 - Github: https://github.com/Dennis-van-Gils/python-dvg-debug-functions
 - PyPI: https://pypi.org/project/dvg-debug-functions
 
-Installation:
+Installation::
 
-    ``pip install dvg-debug-functions``
+    pip install dvg-debug-functions
 
 API
 ===
