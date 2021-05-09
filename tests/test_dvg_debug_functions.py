@@ -71,3 +71,17 @@ def test_pft():
     except ZeroDivisionError as err:
         with mock.patch("sys.stdout", new=io.StringIO()) as fake_stdout:
             pft(err, 1)
+
+
+def test_overrule():
+    import dvg_debug_functions
+
+    dvg_debug_functions.OVERRULE_SHOW_FULL_PATHS = True
+    try:
+        0 / 0
+    except ZeroDivisionError as err:
+        with mock.patch("sys.stdout", new=io.StringIO()) as fake_stdout:
+            pft(err, 1)
+
+    with mock.patch("sys.stdout", new=io.StringIO()) as fake_stdout:
+        pft("Custom error string", 1)

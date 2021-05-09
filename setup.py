@@ -24,7 +24,7 @@ def read(*names, **kwargs):
 
 setup(
     name="dvg-debug-functions",
-    version="2.1.1",
+    version="2.1.2",
     license="MIT",
     description="Functions to neatly print debug information to the terminal output, well-suited for multithreaded programs.",
     long_description="%s\n%s"

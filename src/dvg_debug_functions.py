@@ -6,8 +6,8 @@ output, well-suited for multithreaded programs.
 __author__ = "Dennis van Gils"
 __authoremail__ = "vangils.dennis@gmail.com"
 __url__ = "https://github.com/Dennis-van-Gils/python-dvg-debug-functions"
-__date__ = "18-07-2020"
-__version__ = "2.1.1"
+__date__ = "09-05-2021"
+__version__ = "2.1.2"
 
 import os
 import sys
@@ -21,7 +21,8 @@ except ImportError:
     PYQT5_IS_PRESENT = False
 else:
     PYQT5_IS_PRESENT = True
-    dprint_mutex = QtCore.QMutex()
+    dprint_locker = QtCore.QMutexLocker(QtCore.QMutex())
+    dprint_locker.unlock()
 
 # Setting this global module variable to `True` or `False` will overrule the
 # argument `show_full_paths` in `print_fancy_traceback()`.
@@ -48,7 +49,7 @@ def dprint(str_msg: str, ANSI_color: str = None):
     function ensure that each line sent to the terminal will remain as a
     continious single line, whereas a regular ``print()`` statement will likely
     result in the lines getting mixed up.
-    
+
     The line will be terminated with a newline character and the terminal output
     buffer is forced to flush before and after every print. In addition, if
     PyQt5 is present in the Python environment, then a mutex lock will be
@@ -66,7 +67,7 @@ def dprint(str_msg: str, ANSI_color: str = None):
     # >: Output line of thread 2                          (\n)
 
     if PYQT5_IS_PRESENT:
-        locker = QtCore.QMutexLocker(dprint_mutex)
+        dprint_locker.relock()
 
     sys.stdout.flush()
     if ANSI_color is None:
@@ -76,7 +77,7 @@ def dprint(str_msg: str, ANSI_color: str = None):
     sys.stdout.flush()
 
     if PYQT5_IS_PRESENT:
-        locker.unlock()
+        dprint_locker.relock()
 
 
 def tprint(str_msg: str, ANSI_color: str = None):
