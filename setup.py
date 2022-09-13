@@ -25,8 +25,8 @@ def read(*names, **kwargs):
 setup(
     name="dvg-debug-functions",
     license="MIT",
-    version="2.1.3",  # PICK UP FROM 2.1.3, because 2.1.2 got yanked
-    description="Functions to neatly print debug information to the terminal output, well-suited for multithreaded programs.",
+    version="2.2.0",
+    description="Provides functions for neatly printing debug information to the terminal output, well-suited for multithreaded programs.",
     long_description="%s\n%s"
     % (
         re.compile("^.. start-badges.*^.. end-badges", re.M | re.S).sub(
@@ -54,6 +54,7 @@ setup(
         "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
+        "Programming Language :: Python :: 3.9",
         "Topic :: Utilities",
     ],
     project_urls={
@@ -65,7 +66,7 @@ setup(
         "debugging",
         "utility",
         "fancy",
-        ],
+    ],
     python_requires=">=3.6",
     install_requires=[],
     extras_require={},

@@ -6,22 +6,61 @@ output, well-suited for multithreaded programs.
 __author__ = "Dennis van Gils"
 __authoremail__ = "vangils.dennis@gmail.com"
 __url__ = "https://github.com/Dennis-van-Gils/python-dvg-debug-functions"
-__date__ = "18-07-2020"
-__version__ = "2.1.1"
+__date__ = "13-09-2022"
+__version__ = "2.2.0"
 
-import os
-import sys
 import time
 import traceback
 import inspect
 
-try:
-    from PyQt5 import QtCore
-except ImportError:
-    PYQT5_IS_PRESENT = False
-else:
-    PYQT5_IS_PRESENT = True
+# Mechanism to support both PyQt and PySide
+# -----------------------------------------
+import os
+import sys
+
+QT_LIB = os.getenv("PYQTGRAPH_QT_LIB")
+PYSIDE = "PySide"
+PYSIDE2 = "PySide2"
+PYSIDE6 = "PySide6"
+PYQT4 = "PyQt4"
+PYQT5 = "PyQt5"
+PYQT6 = "PyQt6"
+
+# pylint: disable=import-error, no-name-in-module
+# fmt: off
+if QT_LIB is None:
+    libOrder = [PYQT5, PYSIDE2, PYSIDE6, PYQT6]
+    for lib in libOrder:
+        if lib in sys.modules:
+            QT_LIB = lib
+            break
+
+if QT_LIB is None:
+    for lib in libOrder:
+        try:
+            __import__(lib)
+            QT_LIB = lib
+            break
+        except ImportError:
+            pass
+
+if QT_LIB == PYQT5:
+    from PyQt5 import QtCore                               # type: ignore
     dprint_mutex = QtCore.QMutex()
+elif QT_LIB == PYQT6:
+    from PyQt6 import QtCore                               # type: ignore
+    dprint_mutex = QtCore.QMutex()
+elif QT_LIB == PYSIDE2:
+    from PySide2 import QtCore                             # type: ignore
+    dprint_mutex = QtCore.QMutex()
+elif QT_LIB == PYSIDE6:
+    from PySide6 import QtCore                             # type: ignore
+    dprint_mutex = QtCore.QMutex()
+
+# fmt: on
+# pylint: enable=import-error, no-name-in-module
+# \end[Mechanism to support both PyQt and PySide]
+# -----------------------------------------------
 
 # Setting this global module variable to `True` or `False` will overrule the
 # argument `show_full_paths` in `print_fancy_traceback()`.
@@ -48,7 +87,7 @@ def dprint(str_msg: str, ANSI_color: str = None):
     function ensure that each line sent to the terminal will remain as a
     continious single line, whereas a regular ``print()`` statement will likely
     result in the lines getting mixed up.
-    
+
     The line will be terminated with a newline character and the terminal output
     buffer is forced to flush before and after every print. In addition, if
     PyQt5 is present in the Python environment, then a mutex lock will be
@@ -65,7 +104,7 @@ def dprint(str_msg: str, ANSI_color: str = None):
     # >: Output line of thread 1                          (\n)
     # >: Output line of thread 2                          (\n)
 
-    if PYQT5_IS_PRESENT:
+    if QT_LIB is not None:
         locker = QtCore.QMutexLocker(dprint_mutex)
 
     sys.stdout.flush()
@@ -75,7 +114,7 @@ def dprint(str_msg: str, ANSI_color: str = None):
         print("%s%s%s\n" % (ANSI_color, str_msg, ANSI.WHITE), end="")
     sys.stdout.flush()
 
-    if PYQT5_IS_PRESENT:
+    if QT_LIB is not None:
         locker.unlock()
 
 

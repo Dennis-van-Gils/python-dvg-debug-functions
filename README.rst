@@ -13,7 +13,10 @@
 
 DvG_debug_functions
 ===================
-*Provides functions for printing debug information to the terminal output.*
+*Provides functions for neatly printing debug information to the terminal
+output, well-suited for multithreaded programs.*
+
+Supports PyQt5, PyQt6, PySide2 and PySide6.
 
 - Github: https://github.com/Dennis-van-Gils/python-dvg-debug-functions
 - PyPI: https://pypi.org/project/dvg-debug-functions

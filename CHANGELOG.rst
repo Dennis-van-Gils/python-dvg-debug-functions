@@ -1,6 +1,10 @@
 Changelog
 =========
 
+2.2.0 (2022-09-13)
+------------------
+* Added support for PyQt5, PyQt6, PySide2 and PySide6
+
 2.1.1 (2020-07-18)
 ------------------
 * Added flag `show_full_paths` to `print_fancy_traceback()`
