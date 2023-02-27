@@ -7,7 +7,7 @@ __author__ = "Dennis van Gils"
 __authoremail__ = "vangils.dennis@gmail.com"
 __url__ = "https://github.com/Dennis-van-Gils/python-dvg-debug-functions"
 __date__ = "27-02-2023"
-__version__ = "2.2.0"
+__version__ = "2.3.0"
 
 import os
 import sys
