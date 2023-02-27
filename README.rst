@@ -2,8 +2,8 @@
     :target: https://pypi.org/project/dvg-debug-functions
 .. image:: https://img.shields.io/pypi/pyversions/dvg-debug-functions
     :target: https://pypi.org/project/dvg-debug-functions
-.. image:: https://travis-ci.com/Dennis-van-Gils/python-dvg-debug-functions.svg?branch=master
-    :target: https://travis-ci.com/Dennis-van-Gils/python-dvg-debug-functions
+.. image:: https://github.com/Dennis-van-Gils/python-dvg-debug-functions/actions/workflows/python-package.yml/badge.svg
+    :target: https://github.com/Dennis-van-Gils/python-dvg-debug-functions/actions/workflows/python-package.yml
 .. image:: https://coveralls.io/repos/github/Dennis-van-Gils/python-dvg-debug-functions/badge.svg?branch=master
     :target: https://coveralls.io/github/Dennis-van-Gils/python-dvg-debug-functions?branch=master
 .. image:: https://img.shields.io/badge/code%20style-black-000000.svg
