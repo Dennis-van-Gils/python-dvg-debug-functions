@@ -7,7 +7,7 @@ __author__ = "Dennis van Gils"
 __authoremail__ = "vangils.dennis@gmail.com"
 __url__ = "https://github.com/Dennis-van-Gils/python-dvg-debug-functions"
 __date__ = "27-02-2023"
-__version__ = "2.3.0"
+__version__ = "2.4.0"
 
 import os
 import sys
@@ -40,12 +40,12 @@ if QT_LIB is None:
         except ImportError:
             pass
 
-if QT_LIB is None:
-    this_file = __file__.split(os.sep)[-1]
-    raise ImportError(
-        f"{this_file} requires PyQt5, PyQt6, PySide2 or PySide6; "
-        "none of these packages could be imported."
-    )
+# if QT_LIB is None:
+#    this_file = __file__.split(os.sep)[-1]
+#    raise ImportError(
+#        f"{this_file} requires PyQt5, PyQt6, PySide2 or PySide6; "
+#        "none of these packages could be imported."
+#    )
 
 # fmt: off
 # pylint: disable=import-error, no-name-in-module

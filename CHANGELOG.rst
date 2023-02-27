@@ -1,9 +1,10 @@
 Changelog
 =========
 
-2.3.0 (2022-09-13)
+2.4.0 (2022-09-13)
 ------------------
 * Neater support for PyQt5, PyQt6, PySide2 and PySide6
+* Migrated from travis to Github actions
 
 2.2.0 (2022-09-13)
 ------------------
