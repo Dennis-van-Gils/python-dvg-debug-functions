@@ -6,66 +6,23 @@ output, well-suited for multithreaded programs.
 __author__ = "Dennis van Gils"
 __authoremail__ = "vangils.dennis@gmail.com"
 __url__ = "https://github.com/Dennis-van-Gils/python-dvg-debug-functions"
-__date__ = "27-02-2023"
-__version__ = "2.4.0"
+__date__ = "22-06-2024"
+__version__ = "2.5.0"
 
 import os
 import sys
 import time
 import traceback
 import inspect
+from typing import Union
 
-# Mechanism to support both PyQt and PySide
-# -----------------------------------------
+dprint_mutex = None
+try:
+    from qtpy import QtCore
 
-PYQT5 = "PyQt5"
-PYQT6 = "PyQt6"
-PYSIDE2 = "PySide2"
-PYSIDE6 = "PySide6"
-QT_LIB_ORDER = [PYQT5, PYSIDE2, PYSIDE6, PYQT6]
-QT_LIB = None
-
-if QT_LIB is None:
-    for lib in QT_LIB_ORDER:
-        if lib in sys.modules:
-            QT_LIB = lib
-            break
-
-if QT_LIB is None:
-    for lib in QT_LIB_ORDER:
-        try:
-            __import__(lib)
-            QT_LIB = lib
-            break
-        except ImportError:
-            pass
-
-# if QT_LIB is None:
-#    this_file = __file__.split(os.sep)[-1]
-#    raise ImportError(
-#        f"{this_file} requires PyQt5, PyQt6, PySide2 or PySide6; "
-#        "none of these packages could be imported."
-#    )
-
-# fmt: off
-# pylint: disable=import-error, no-name-in-module
-if QT_LIB == PYQT5:
-    from PyQt5 import QtCore                               # type: ignore
     dprint_mutex = QtCore.QMutex()
-elif QT_LIB == PYQT6:
-    from PyQt6 import QtCore                               # type: ignore
-    dprint_mutex = QtCore.QMutex()
-elif QT_LIB == PYSIDE2:
-    from PySide2 import QtCore                             # type: ignore
-    dprint_mutex = QtCore.QMutex()
-elif QT_LIB == PYSIDE6:
-    from PySide6 import QtCore                             # type: ignore
-    dprint_mutex = QtCore.QMutex()
-# pylint: enable=import-error, no-name-in-module
-# fmt: on
-
-# \end[Mechanism to support both PyQt and PySide]
-# -----------------------------------------------
+except ImportError:
+    pass
 
 # Setting this global module variable to `True` or `False` will overrule the
 # argument `show_full_paths` in `print_fancy_traceback()`.
@@ -84,7 +41,7 @@ class ANSI:
     WHITE = "\033[1;37m"
 
 
-def dprint(str_msg: str, ANSI_color: str = None):
+def dprint(str_msg: str, ANSI_color: Union[str, None] = None):
     """'Debug' print a single line to the terminal with optional ANSI color
     codes. There is a lot of overhead using this print statement, but it is
     particularly well-suited for multithreaded PyQt programs where multiple
@@ -109,25 +66,25 @@ def dprint(str_msg: str, ANSI_color: str = None):
     # >: Output line of thread 1                          (\n)
     # >: Output line of thread 2                          (\n)
 
-    if QT_LIB is not None:
+    if dprint_mutex is not None:
         locker = QtCore.QMutexLocker(dprint_mutex)
 
     sys.stdout.flush()
     if ANSI_color is None:
-        print("%s\n" % str_msg, end="")
+        print(f"{str_msg}\n", end="")
     else:
-        print("%s%s%s\n" % (ANSI_color, str_msg, ANSI.WHITE), end="")
+        print(f"{ANSI_color}{str_msg}{ANSI.WHITE}\n", end="")
     sys.stdout.flush()
 
-    if QT_LIB is not None:
+    if dprint_mutex is not None:
         locker.unlock()
 
 
-def tprint(str_msg: str, ANSI_color: str = None):
+def tprint(str_msg: str, ANSI_color: Union[str, None] = None):
     """Identical to ``dprint()``, but now prepended with a ``time.perf_counter()``
     timestamp.
     """
-    dprint("%.4f %s" % (time.perf_counter(), str_msg), ANSI_color)
+    dprint(f"{time.perf_counter():.4f} {str_msg}", ANSI_color)
 
 
 def print_fancy_traceback(
@@ -138,9 +95,9 @@ def print_fancy_traceback(
 
     Args:
         err (``Exception`` | ``str`` | ``None``, optional):
-            When ``err`` is of type ``Exception``, then an exception traceback will
-            be printed. When ``err`` is of another type, then the current regular
-            call-stack traceback will be printed.
+            When ``err`` is of type ``Exception``, then an exception traceback
+            will be printed. When ``err`` is of another type, then the current
+            regular call-stack traceback will be printed.
 
             Default: ``None``
 
@@ -158,22 +115,19 @@ def print_fancy_traceback(
 
     def print_frame(filename, line_no, frame_name):
         print(
-            (
-                ANSI.CYAN
-                + "File "
-                + ANSI.GREEN
-                + '"%s"'
-                + ANSI.CYAN
-                + ", line "
-                + ANSI.GREEN
-                + "%s"
-                + ANSI.CYAN
-                + ", in "
-                + ANSI.PURPLE
-                + "%s"
-                + ANSI.WHITE
-            )
-            % (filename, line_no, frame_name)
+            ANSI.CYAN
+            + "File "
+            + ANSI.GREEN
+            + f'"{filename}"'
+            + ANSI.CYAN
+            + ", line "
+            + ANSI.GREEN
+            + f"{line_no}"
+            + ANSI.CYAN
+            + ", in "
+            + ANSI.PURPLE
+            + f"{frame_name}"
+            + ANSI.WHITE
         )
 
     print(
@@ -208,10 +162,12 @@ def print_fancy_traceback(
 
             print_frame(file_descr, frame.lineno, frame.name)
 
-        print("----> %s" % stack[-1].line)
-        print(
-            (ANSI.RED + "%s: " + ANSI.WHITE + "%s") % (etype.__name__, evalue)
-        )
+        print(f"----> {stack[-1].line}")
+        if etype is None:
+            print(": ", end="")
+        else:
+            print(ANSI.RED + f"{etype.__name__}: ", end="")
+        print(ANSI.WHITE + f"{evalue}")
 
     else:
         # Regular call stack traceback
@@ -236,4 +192,4 @@ def print_fancy_traceback(
             print_frame(file_descr, frame.lineno, frame.function)
 
         if isinstance(err, str):
-            print((ANSI.RED + "Error: " + ANSI.WHITE + "%s") % err)
+            print(ANSI.RED + "Error: " + ANSI.WHITE + f"{err}")

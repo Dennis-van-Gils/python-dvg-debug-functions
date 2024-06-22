@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+"""Test"""
+# pylint: disable=missing-function-docstring
+
 import io
 import unittest
 from unittest import mock
@@ -33,7 +36,7 @@ class TestAll(unittest.TestCase):
 
     def test_pft(self):
         try:
-            0 / 0
+            0 / 0  # type: ignore
         except ZeroDivisionError as err:
             with mock.patch("sys.stdout", new=io.StringIO()) as fake_stdout:
                 pft(err, 1)
@@ -45,7 +48,7 @@ class TestAll(unittest.TestCase):
 
     def test_pft_overshoot_callstack(self):
         try:
-            0 / 0
+            0 / 0  # type: ignore
         except ZeroDivisionError as err:
             with mock.patch("sys.stdout", new=io.StringIO()) as fake_stdout:
                 pft(err, 50)
